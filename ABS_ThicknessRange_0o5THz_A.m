@@ -101,8 +101,10 @@ title("ΔR, " + x + "-IW @0.5THz (Cons.)")   % Inserts name of imaging window ma
 alpha(.8)   % Sets level of transparency of plot
 colorbar    % Includes legend for color of plot and correlating change in reflectance
 
-maxDeltaRmatrix = max(DeltaRmatrix);
-requiredDeltaRmatrix = 0.9*maxDeltaRmatrix;
+maxDeltaRmatrix = max(DeltaRmatrix);    % Finds maximum change in reflectance values at each skin refractive index value
+requiredDeltaRmatrix = 0.9*maxDeltaRmatrix; % At each skin refractive index, finds minimum required change in reflectance value in order to stay within 10% of peak 
+tf_acceptable_DeltaR = DeltaRmatrix > requiredDeltaRmatrix;  % Generates logic matrix that checks change in reflectance at all thicknesses for each reractive indices to see if it meets the required value
+
 
 % DeltaRmatrix(end,:)
 
