@@ -18,14 +18,14 @@ n0 = 1; %(Consistant value of n0=1)
 clc
 
 % Find values used in thickness array
-dmin = 0.003; %(Defines minimum value plotted)
-dmax = 0.005; %(Defines maximum value plotted)
+dmin = 0.00335; %(Defines minimum value plotted)
+dmax = 0.003525; %(Defines maximum value plotted)
 dr = dmax-dmin;  %(Determines range of thickness being computed)
 di = dr/1000; %(Determines increments used in thickness range)
 
 % Find values used in refractive index array
-n21min = 1.5; %(Defines minimum value plotted)
-n21max = 3.0; %(Defines maximum value plotted)
+n21min = 1.6; %(Defines minimum value plotted)
+n21max = 3.1; %(Defines maximum value plotted)
 nr = n21max-n21min;  %(Determines range of thickness being computed)
 ni = nr/1000; %(Determines increments used in thickness range)
 
@@ -43,18 +43,10 @@ narray = n21min:ni:n21max;  %(Creates array of all plotted thickness values)
 % Preallocates empty matrix for change in reflectance values
 DeltaRmatrix = zeros(length(darray):length(narray));
 
-% (Posibly unneccessary)
-% Preallocates empty array for reflectance values at highest skin RI
-%extreme_DeltaR = zeros(1,length(darray));
-
 % Begings loop of calculations for all values of thickness and refractive index being being tested
 for j = 1:length(narray)   
 
     for i = 1:length(darray)
-
-    % (Possibly unneccessary)
-    %peak_extreme_DeltaR = max(extreme_DeltaR); % Finds peak change in reflection at highest skin RI
-    %required_extreme_DeltaR = 0.9*peak_extreme_DeltaR; % Defines criteria for acceptable change in reflectance
 
 % Determines current thickness
 d = darray(i);
@@ -98,11 +90,6 @@ DeltaR = (abs(R1-R2));
 
 DeltaRmatrix(j,i) = DeltaR; % Creates matrix of change in reflectance from thickness of imaging window and refractive index of skin
 
-% (Possibly unneccessary)
-%if n21==n21max  % ("If this iteration is calculating change in reflectance at the highest skin RI...")
-    %extreme_DeltaR(i) = DeltaR;  % Records change in reflectance value into new array that only contains values at highest skin RI
-%end
-
     end
 end
 
@@ -113,11 +100,6 @@ zlabel('Change in Reflectance')
 title("ΔR, " + x + "-IW @0.5THz (Cons.)")   % Inserts name of imaging window material into title of plot
 alpha(.8)   % Sets level of transparency of plot
 colorbar    % Includes legend for color of plot and correlating change in reflectance
-
-% (Possibly unneccessary)
-%tf_accepted_darray = extreme_DeltaR > required_extreme_DeltaR; % Creates true false array determining whether or not the change in reflectance (@ highest skin RI) of each thickness is acceptable
-%accepted_thickness = darray(tf_accepted_darray); % Creates array of these accepted thickness values at highest skin RI
-
 
 maxDeltaRmatrix = max(DeltaRmatrix);
 requiredDeltaRmatrix = 0.9*maxDeltaRmatrix;
