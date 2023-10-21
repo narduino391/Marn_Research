@@ -93,13 +93,13 @@ DeltaRmatrix(j,i) = DeltaR; % Creates matrix of change in reflectance from thick
     end
 end
 
-surf(darray,narray,DeltaRmatrix,EdgeColor="none")   % Generates surface plot of change in reflectance in terms of both thickness and skin refractive index
-xlabel('Thickness')
-ylabel('Refractive Index')
-zlabel('Change in Reflectance')
-title("ΔR, " + x + "-IW @0.5THz (Cons.)")   % Inserts name of imaging window material into title of plot
-alpha(.8)   % Sets level of transparency of plot
-colorbar    % Includes legend for color of plot and correlating change in reflectance
+%surf(darray,narray,DeltaRmatrix,EdgeColor="none")   % Generates surface plot of change in reflectance in terms of both thickness and skin refractive index
+%xlabel('Thickness')
+%ylabel('Refractive Index')
+%zlabel('Change in Reflectance')
+%title("ΔR, " + x + "-IW @0.5THz (Cons.)")   % Inserts name of imaging window material into title of plot
+%alpha(.8)   % Sets level of transparency of plot
+%colorbar    % Includes legend for color of plot and correlating change in reflectance
 
 maxDeltaRmatrix = max(DeltaRmatrix);    % Finds maximum change in reflectance values at each skin refractive index value
 requiredDeltaRmatrix = 0.9*maxDeltaRmatrix; % At each skin refractive index, finds minimum required change in reflectance value in order to stay within 10% of peak 
