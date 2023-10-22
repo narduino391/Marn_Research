@@ -106,8 +106,6 @@ requiredDeltaRmatrix = 0.9*maxDeltaRmatrix; % At each skin refractive index, fin
 tf_acceptable_DeltaR = DeltaRmatrix > requiredDeltaRmatrix;  % Generates logic matrix that checks change in reflectance at all thicknesses for each reractive indices to see if it meets the required value
 darray_matrix = meshgrid(darray,narray);    % Generates matrix with the same dimensions as DeltaRmatrix, containing repeating rows of the thickness values of darray
 
-%surf(darray,narray,acceptable_DeltaRmatrix,EdgeColor="none")   % Generates surface plot of only acceptable change in reflectance values
-
 
 % DeltaRmatrix(end,:)
 
