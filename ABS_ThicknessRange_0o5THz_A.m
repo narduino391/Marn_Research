@@ -104,20 +104,24 @@ end
 maxDeltaRmatrix = max(DeltaRmatrix);    % Finds maximum change in reflectance values at each skin refractive index value
 requiredDeltaRmatrix = 0.9*maxDeltaRmatrix; % At each skin refractive index, finds minimum required change in reflectance value in order to stay within 10% of peak 
 tf_acceptable_DeltaR = DeltaRmatrix > requiredDeltaRmatrix;  % Generates logic matrix that checks change in reflectance at all thicknesses for each reractive indices to see if it meets the required value
+darray_matrix = meshgrid(darray,narray);    % Generates matrix with the same dimensions as DeltaRmatrix, containing repeating rows of the thickness values of darray
+
+%surf(darray,narray,acceptable_DeltaRmatrix,EdgeColor="none")   % Generates surface plot of only acceptable change in reflectance values
 
 
 % DeltaRmatrix(end,:)
+
 
 % Likely will want to create separate script for each material analyzed
 
 % Creating universal programmatic method will likely be time consuming
 % (and maybe a little too difficult for my current skill level)
 
-% Select single tunnel
-% Find maximum DeltaR across RI and thickness
-% Find allowable
-% Check using logic matrix
-% Output values of 2-d darray by plugging in logic magtrix
+% Select single tunnel (Check)
+% Find maximum DeltaR across RI and thickness (Check)
+% Find allowable (Check)
+% Check using logic matrix (Check)
+% Output values of 2-d darray by plugging in logic magtrix 
 % Plugging logic matrix into original DeltaRmatrix should give matrix of only acceptable deltaR's
 % Can use this to create surface plot and find range of viable thicknesses
 % May have issues with dimensions of matrices, but can confer with Dr. Marn at that point
