@@ -101,13 +101,25 @@ end
 %alpha(.8)   % Sets level of transparency of plot
 %colorbar    % Includes legend for color of plot and correlating change in reflectance
 
-maxDeltaRmatrix = max(DeltaRmatrix);    % Finds maximum change in reflectance values at each skin refractive index value
+maxDeltaRmatrix = max(DeltaRmatrix,[],2);    % Finds maximum change in reflectance values at each skin refractive index value
 requiredDeltaRmatrix = 0.9*maxDeltaRmatrix; % At each skin refractive index, finds minimum required change in reflectance value in order to stay within 10% of peak 
 tf_acceptable_DeltaR = DeltaRmatrix > requiredDeltaRmatrix;  % Generates logic matrix that checks change in reflectance at all thicknesses for each reractive indices to see if it meets the required value
 darray_matrix = meshgrid(darray,narray);    % Generates matrix with the same dimensions as DeltaRmatrix, containing repeating rows of the thickness values of darray
+acceptable_thickness = darray_matrix .* tf_acceptable_DeltaR;   % Creates matrix containing thicknesses at which change in reflectance is acceptable and displays zeros at thicknesses where it is not
+acceptable_DeltaRmatrix = DeltaRmatrix .* tf_acceptable_DeltaR; % Creates matrix containing change in reflectance values that meet the required value and zeros when it does not
+
+tmp = acceptable_thickness; % Creates temporary copy of acceptable_thickness matrix for slight manipulation
+tmp(tmp==0) = Inf;  % Sets all 0 values to infinity
+minimum_thickness = min(tmp,[],2);  % Finds minimum thickness value of each row (skin refractive index) of the tmp(acceptable_thickness) matrix
+
+maximum_thickness = max(acceptable_thickness,[],2); % Finds maximum thickness value of each row (skin refractive index) of the acceptable_thickness matrix)
+
+thickness_range = maximum_thickness-minimum_thickness;  % Finds range of acceptable thicknesses from each row (skin refractive index)
+minimum_thickness_range = min(thickness_range); % Finds minimum range of thickness for all skin refractive indices
 
 
-% DeltaRmatrix(end,:)
+
+
 
 
 % Likely will want to create separate script for each material analyzed
