@@ -120,8 +120,9 @@ thickness_range = maximum_thickness-minimum_thickness;  % Finds range of accepta
 minimum_thickness_range = min(thickness_range); % Finds minimum range of thickness for all skin refractive indices
 minimum_thickness_variation = 0.5*minimum_thickness_range;  % Cuts range in half to find accepted variance from peak
 
+disp(x) % Displays material name for verification
 fprintf('For peak change in reflectance, the target thickness is %.10fm.\n',maxDeltaR_thickness)    % Displays target thickness for peak change in reflectance
-fprinf('The lowest acceptable variation')   % Displays lowest acceptable thickness variation
+fprintf('The lowest acceptable variation from the target thickness is +/-%.10fm.\n',minimum_thickness_range)   % Displays lowest acceptable thickness variation
 
 
 % Likely will want to create separate script for each material analyzed

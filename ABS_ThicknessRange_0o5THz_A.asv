@@ -102,8 +102,8 @@ end
 %colorbar    % Includes legend for color of plot and correlating change in reflectance
 
 [maxDeltaRmatrix,maxDeltaR_thickness_index] = max(DeltaRmatrix,[],2);    % Finds maximum change in reflectance values at each skin refractive index value
-maxDeltaR_thickness_index = mean(maxDeltaR_thickness_index);
-maxDeltaR_thickness = darray(maxDeltaR_thickness_index);
+maxDeltaR_thickness_index = mean(maxDeltaR_thickness_index);    % Finds thickness index of peak change in reflectance (finds mean of identical values iterated in maxDeltaR_thickness_index)
+maxDeltaR_thickness = darray(maxDeltaR_thickness_index);    % Finds thickness value at given thickness index associated with peak change in reflectance
 requiredDeltaRmatrix = 0.9*maxDeltaRmatrix; % At each skin refractive index, finds minimum required change in reflectance value in order to stay within 10% of peak 
 tf_acceptable_DeltaR = DeltaRmatrix > requiredDeltaRmatrix;  % Generates logic matrix that checks change in reflectance at all thicknesses for each reractive indices to see if it meets the required value
 darray_matrix = meshgrid(darray,narray);    % Generates matrix with the same dimensions as DeltaRmatrix, containing repeating rows of the thickness values of darray
@@ -118,10 +118,11 @@ maximum_thickness = max(acceptable_thickness,[],2); % Finds maximum thickness va
 
 thickness_range = maximum_thickness-minimum_thickness;  % Finds range of acceptable thicknesses from each row (skin refractive index)
 minimum_thickness_range = min(thickness_range); % Finds minimum range of thickness for all skin refractive indices
-minimum_thickness_variation = 0.5*minimum_thickness_range;
+minimum_thickness_variation = 0.5*minimum_thickness_range;  % Cuts range in half to find accepted variance from peak
 
-fprintf('For peak change in reflectance, the target thickness is %.10fm.\n',maxDeltaR_thickness)
-fprinf('The lowest acceptable variation')
+disp(x) % Displays material name for verification
+fprintf('For peak change in reflectance, the target thickness is %.10fm.\n',maxDeltaR_thickness)    % Displays target thickness for peak change in reflectance
+fprintf('The lowest acceptable variation from the target thickness is +/-%.10fm.\n',minimum_thickness_range)   % Displays lowest acceptable thickness variation
 
 
 % Likely will want to create separate script for each material analyzed
