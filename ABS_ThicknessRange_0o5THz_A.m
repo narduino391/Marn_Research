@@ -135,3 +135,5 @@ minimum_thickness_range = min(thickness_range); % Finds minimum range of thickne
 % Plugging logic matrix into original DeltaRmatrix should give matrix of only acceptable deltaR's
 % Can use this to create surface plot and find range of viable thicknesses
 % May have issues with dimensions of matrices, but can confer with Dr. Marn at that point
+
+%test
