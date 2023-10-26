@@ -93,13 +93,13 @@ DeltaRmatrix(j,i) = DeltaR; % Creates matrix of change in reflectance from thick
     end
 end
 
-%surf(darray,narray,DeltaRmatrix,EdgeColor="none")   % Generates surface plot of change in reflectance in terms of both thickness and skin refractive index
-%xlabel('Thickness')
-%ylabel('Refractive Index')
-%zlabel('Change in Reflectance')
-%title("ΔR, " + x + "-IW @0.5THz (Cons.)")   % Inserts name of imaging window material into title of plot
-%alpha(.8)   % Sets level of transparency of plot
-%colorbar    % Includes legend for color of plot and correlating change in reflectance
+surf(darray,narray,DeltaRmatrix,EdgeColor="none")   % Generates surface plot of change in reflectance in terms of both thickness and skin refractive index
+xlabel('Thickness')
+ylabel('Refractive Index')
+zlabel('Change in Reflectance')
+title("ΔR, " + x + "-IW @0.5THz (Cons.)")   % Inserts name of imaging window material into title of plot
+alpha(.8)   % Sets level of transparency of plot
+colorbar    % Includes legend for color of plot and correlating change in reflectance
 
 [maxDeltaRmatrix,maxDeltaR_thickness_index] = max(DeltaRmatrix,[],2);    % Finds maximum change in reflectance values at each skin refractive index value
 maxDeltaR_thickness_index = mean(maxDeltaR_thickness_index);    % Finds thickness index of peak change in reflectance (finds mean of identical values iterated in maxDeltaR_thickness_index)
@@ -124,6 +124,11 @@ disp(x) % Displays material name for verification
 fprintf('For peak change in reflectance, the target thickness is %.10fm.\n',maxDeltaR_thickness)    % Displays target thickness for peak change in reflectance
 fprintf('The lowest acceptable variation from the target thickness is +/-%.10fm.\n',minimum_thickness_range)   % Displays lowest acceptable thickness variation
 
+max_acceptable_thickness = maxDeltaR_thickness + minimum_thickness_variation; % Stores value of max end of acceptable thickness range (to be used for sanity check)
+min_acceptable_thickness = maxDeltaR_thickness - minimum_thickness_variation; % Stores value of min end of acceptable thickness range (to be used for sanity check)
+
+fprintf('Minimum thickness: %.10fm\n',min_acceptable_thickness)
+fprintf('Maximum thickness: %.10fm\n',max_acceptable_thickness)
 
 % Likely will want to create separate script for each material analyzed
 
