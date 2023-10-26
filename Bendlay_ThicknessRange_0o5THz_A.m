@@ -103,7 +103,7 @@ colorbar    % Includes legend for color of plot and correlating change in reflec
 
 [maxDeltaRmatrix,maxDeltaR_thickness_index] = max(DeltaRmatrix,[],2);    % Finds maximum change in reflectance values at each skin refractive index value
 maxDeltaR_thickness_index = mean(maxDeltaR_thickness_index);    % Finds thickness index of peak change in reflectance (finds mean of identical values iterated in maxDeltaR_thickness_index)
-maxDeltaR_thickness_index = round(maxDeltaR_thickness_index);
+maxDeltaR_thickness_index = round(maxDeltaR_thickness_index);   % Rounds thickness index of peak change in reflectance to usable index value
 maxDeltaR_thickness = darray(maxDeltaR_thickness_index);    % Finds thickness value at given thickness index associated with peak change in reflectance
 requiredDeltaRmatrix = 0.9*maxDeltaRmatrix; % At each skin refractive index, finds minimum required change in reflectance value in order to stay within 10% of peak 
 tf_acceptable_DeltaR = DeltaRmatrix > requiredDeltaRmatrix;  % Generates logic matrix that checks change in reflectance at all thicknesses for each reractive indices to see if it meets the required value
