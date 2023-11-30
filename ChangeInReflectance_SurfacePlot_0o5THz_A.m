@@ -16,10 +16,11 @@ clc
 % Polystyrene - 1.56
 % PP (Polypropylene) - 1.495
 % PLA (Polylactic acid) - 1.89
+% HRFZ-Si
 
 % Source of RI values: "Busch, S.F., Weidenbach, M., Fey, M. et al. Optical Properties of 3D Printable Plastics in the THz Regime and their Application for 3D Printed THz Optics. J Infrared Milli Terahz Waves 35, 993–997 (2014). https://doi.org/10.1007/s10762-014-0113-9"
 
-list={'ABS','Bendlay','HDPE','Nylon','Polystyrene','PP','PLA'}; % Defines list of avaialable imaging window materials
+list={'ABS','Bendlay','HDPE','Nylon','Polystyrene','PP','PLA','HRFZ-Si'}; % Defines list of avaialable imaging window materials
 did_select=0;
 while ~did_select   % Creates loop to ensure that user selects an imaging window material
     [material,did_select] = listdlg('PromptString', ... % Prompts user with dialogue box
@@ -50,6 +51,9 @@ switch material % Looks to match index value of material chosen
     case 7
         x='PLA';
         n1=1.89;
+    case 8
+        x='HRFZ-Si';
+        n1=1.54;
 end
 
 % Input to define constant indexes of refraction
@@ -63,7 +67,7 @@ dr = dmax-dmin;  %(Determines range of thickness being computed)
 di = dr/1000; %(Determines increments used in thickness range)
 
 % Find values used in refractive index array
-n21min = 1.0; %(Defines minimum value plotted)
+n21min = 1.5; %(Defines minimum value plotted)
 n21max = 3.0; %(Defines maximum value plotted)
 nr = n21max-n21min;  %(Determines range of thickness being computed)
 ni = nr/1000; %(Determines increments used in thickness range)
