@@ -147,6 +147,8 @@ colorbar    % Includes legend for color of plot and correlating change in reflec
 
 
 
+% FUTURE NOTES:
+
 % DeltaRmatrix(end,:)
 
 % Likely will want to create separate script for each material analyzed
